@@ -7,6 +7,7 @@ const ora = require('ora')
 const { spawn } = require('child_process')
 const { log } = require('console')
 const { validateEmpty } = require('../utils')
+const chalk = require('chalk')
 
 inquirer
     .prompt([
@@ -35,11 +36,9 @@ inquirer
             validate: validateEmpty,
         },
     ])
-    .then((answers) => {
-        const spinner = ora('start execution.\n')
+    .then(({ projectName, commitMessage, branchName, address }) => {
+        const spinner = ora(`${chalk.yellow('Initializing...')}\n`)
         spinner.start()
-
-        const { projectName, commitMessage, branchName, address } = answers
 
         const cmdLines = `echo "# ${projectName}" >> README.md && git init && git add README.md && git commit -m "${commitMessage}" && git branch -M ${branchName} && git remote add origin git@github.com:${address}.git && git push -u origin ${branchName}`
 
@@ -49,10 +48,10 @@ inquirer
             shell: true,
         })
             .on('exit', () => {
-                spinner.succeed(`initial succeed!\n`)
+                spinner.succeed('initial succeed!\n')
             })
             .on('error', (err) => {
-                spinner.fail('initial failed.')
+                spinner.fail(`${chalk.red('initial failed.')}\n`)
                 log(err)
             })
     })
