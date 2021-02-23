@@ -1,10 +1,10 @@
 {
     "name": "simple-node-script",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "description": "",
     "main": "init-gh-rep.js",
     "scripts": {
-        "release": "npx standard-version && npm publish"
+        "release": "npx standard-version"
     },
     "keywords": [
         "script"
