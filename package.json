@@ -1,0 +1,21 @@
+{
+    "name": "scripts",
+    "version": "1.0.0",
+    "description": "",
+    "main": "init-gh-rep.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "script"
+    ],
+    "author": "wj",
+    "license": "ISC",
+    "dependencies": {
+        "inquirer": "^7.3.3",
+        "ora": "^5.3.0"
+    },
+    "bin": {
+        "init-gh-rep": "./bin/init-gh-rep"
+    }
+}
