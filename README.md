@@ -1,1 +1,1 @@
-# my-scripts
+# simple-node-script

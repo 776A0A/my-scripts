@@ -1,5 +1,5 @@
 {
-    "name": "scripts",
+    "name": "simple-node-script",
     "version": "1.0.0",
     "description": "",
     "main": "init-gh-rep.js",
@@ -10,12 +10,15 @@
         "script"
     ],
     "author": "wj",
-    "license": "ISC",
+    "license": "MIT",
     "dependencies": {
         "inquirer": "^7.3.3",
         "ora": "^5.3.0"
     },
     "bin": {
         "init-gh-rep": "./bin/init-gh-rep"
+    },
+    "repository": {
+        "url": "https://github.com/776A0A/simple-node-script"
     }
 }
