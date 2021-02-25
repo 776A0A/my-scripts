@@ -7,11 +7,6 @@
         "release": "npx standard-version",
         "prepublish": "yarn release"
     },
-    "husky": {
-        "hooks": {
-            "precommit": "node ./verify-commit.js"
-        }
-    },
     "keywords": [
         "script"
     ],
@@ -27,7 +22,6 @@
         "boxen": "^5.0.0",
         "chalk": "^4.1.0",
         "commander": "^7.1.0",
-        "husky": "^5.1.1",
         "inquirer": "^7.3.3",
         "ora": "^5.3.0"
     },

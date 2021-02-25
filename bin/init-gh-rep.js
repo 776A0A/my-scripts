@@ -15,11 +15,10 @@ const pkg = require('../package.json')
 commander
     .version(pkg.version, '-v, --version', 'output the current version')
     .option('-h, --help', 'get usage')
-    .command('init-gh-rep')
-    .description('init a github rep.')
-    .action(ask)
 
-commander.parse(process.argv) 
+commander.command('init-gh-rep').description('init a github rep.').action(ask)
+
+commander.parse(process.argv)
 
 function ask() {
     inquirer
