@@ -13,7 +13,7 @@
     "author": "wj",
     "license": "MIT",
     "bin": {
-        "sns": "./bin/index"
+        "sns": "./bin/index.js"
     },
     "repository": {
         "url": "https://github.com/776A0A/simple-node-script"
