@@ -10,36 +10,33 @@ const { validateEmpty } = require('../utils')
 const chalk = require('chalk')
 const commander = require('commander')
 
-function ask() {
+function ask(address) {
+    const defaultProjectName = address.split('/')[1]
+
     inquirer
         .prompt([
             {
                 type: 'input',
                 name: 'projectName',
-                message: 'Input a project name.',
+                message: '请输入项目名称，格式为 "username/rep-name"',
                 validate: validateEmpty,
+                default: defaultProjectName,
             },
             {
                 type: 'input',
                 name: 'commitMessage',
-                message: 'Input the commit message.',
+                message: '请输入您的第一条 commit message',
                 default: 'first commit',
             },
             {
                 type: 'input',
                 name: 'branchName',
-                message: 'Input a branch name.',
+                message: '请输入分支名称',
                 default: 'master',
             },
-            {
-                type: 'input',
-                name: 'address',
-                message: 'Input your project address',
-                validate: validateEmpty,
-            },
         ])
-        .then(({ projectName, commitMessage, branchName, address }) => {
-            const spinner = ora(`${chalk.yellow('Initializing...')}\n`)
+        .then(({ projectName, commitMessage, branchName }) => {
+            const spinner = ora(`${chalk.yellow('初始化...')}\n`)
             spinner.start()
 
             const cmdLines = `echo "# ${projectName}" >> README.md && git init && git add README.md && git commit -m "${commitMessage}" && git branch -M ${branchName} && git remote add origin git@github.com:${address}.git && git push -u origin ${branchName}`
@@ -50,20 +47,20 @@ function ask() {
                 shell: true,
             })
                 .on('exit', () => {
-                    spinner.succeed('initial succeed!\n')
+                    spinner.succeed('初始化成功!\n')
                 })
                 .on('error', (err) => {
-                    spinner.fail(`${chalk.red('initial failed.')}\n`)
+                    spinner.fail(`${chalk.red('初始化失败')}\n`)
                     log(err)
                 })
         })
 }
 
-const register = () => {
-    commander
-        .command('init-gh-rep')
-        .description('init a github rep.')
-        .action(ask)
+module.exports = {
+    register: () => {
+        commander
+            .command('init-gh-rep <address>')
+            .description('初始化一个 github 仓库', { address: '您的项目地址' })
+            .action(ask)
+    },
 }
-
-module.exports = { register }
