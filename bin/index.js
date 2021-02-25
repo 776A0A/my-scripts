@@ -2,4 +2,4 @@
 
 'use strict'
 
-require('./init-gh-rep')
+require('./register')
