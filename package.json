@@ -4,8 +4,7 @@
     "description": "",
     "main": "init-gh-rep.js",
     "scripts": {
-        "release": "npx standard-version",
-        "prepublish": "yarn release"
+        "release": "npx standard-version"
     },
     "keywords": [
         "script"
@@ -16,6 +15,7 @@
         "sns": "./bin/index.js"
     },
     "repository": {
+        "type": "git",
         "url": "https://github.com/776A0A/simple-node-script"
     },
     "dependencies": {
