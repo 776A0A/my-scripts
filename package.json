@@ -4,7 +4,13 @@
     "description": "",
     "main": "init-gh-rep.js",
     "scripts": {
-        "release": "npx standard-version"
+        "release": "npx standard-version",
+        "prepublish": "yarn release"
+    },
+    "husky": {
+        "hooks": {
+            "precommit": "node ./verify-commit.js"
+        }
     },
     "keywords": [
         "script"
@@ -12,7 +18,7 @@
     "author": "wj",
     "license": "MIT",
     "bin": {
-        "init-gh-rep": "./bin/init-gh-rep"
+        "sns": "./bin/index"
     },
     "repository": {
         "url": "https://github.com/776A0A/simple-node-script"
@@ -20,6 +26,8 @@
     "dependencies": {
         "boxen": "^5.0.0",
         "chalk": "^4.1.0",
+        "commander": "^7.1.0",
+        "husky": "^5.1.1",
         "inquirer": "^7.3.3",
         "ora": "^5.3.0"
     },
