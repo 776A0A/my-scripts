@@ -9,7 +9,12 @@ commander
     .option('-h, --help', 'get usage of sns')
 
 const initGhRep = require('./init-gh-rep')
+const initSpecDev = require('./spec-dev')
 
-initGhRep.register()
+runRegisterQueue([initGhRep, initSpecDev])
+
+function runRegisterQueue(registers) {
+    registers.forEach((r) => r.register())
+}
 
 commander.parse(process.argv)
