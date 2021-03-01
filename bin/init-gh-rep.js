@@ -32,7 +32,7 @@ function ask(address) {
                 type: 'input',
                 name: 'branchName',
                 message: '请输入分支名称',
-                default: 'master',
+                default: 'main',
             },
         ])
         .then(({ projectName, commitMessage, branchName }) => {
