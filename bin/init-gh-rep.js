@@ -6,9 +6,9 @@ const inquirer = require('inquirer')
 const ora = require('ora')
 const { spawn } = require('child_process')
 const { log } = require('console')
-const { validateEmpty } = require('../utils')
 const chalk = require('chalk')
 const commander = require('commander')
+const { validateEmpty } = require('../utils')
 
 function ask(address) {
     const defaultProjectName = address.split('/')[1]
