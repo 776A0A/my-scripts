@@ -33,13 +33,13 @@ module.exports = {
         indent: ['error', 4],
         quotes: ['error', 'single'],
         'jsx-quotes': ['error', 'prefer-single'],
-        'global-require': 'off',
-        'import/no-dynamic-require': 'off',
+        'global-require': 'off', // 关闭默认只能顶层使用require()
+        'import/no-dynamic-require': 'off', // require(path) path允许动态内容
         'no-use-before-define': [
             'error',
             { functions: false, classes: false, variables: true },
-        ],
-        'consistent-return': 'off',
-        strict: 'off',
+        ], // 函数和类允许提升使用
+        'consistent-return': 'off', // 允许不统一的return
+        strict: 'off', // 允许使用 'use strict'
     },
 }
