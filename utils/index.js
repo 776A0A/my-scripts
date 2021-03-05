@@ -1,3 +1,5 @@
-const validateEmpty = require('./validateEmpty')
-
-module.exports = { validateEmpty }
+module.exports = {
+    validateEmpty: require('./validateEmpty'),
+    Spinner: require('./spinner'),
+    Generator: require('./generator'),
+}
