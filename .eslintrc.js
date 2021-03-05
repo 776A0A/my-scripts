@@ -42,5 +42,7 @@ module.exports = {
         'consistent-return': 'off',
         strict: 'off',
         'no-extra-boolean-cast': 'off',
+        'class-methods-use-this': 'off',
+        'no-return-assign': 'off',
     },
 }
