@@ -8,8 +8,16 @@ const { merge } = require('lodash')
 const fs = require('fs-extra')
 const ora = require('ora')
 const globby = require('globby')
+const inquirer = require('inquirer')
 
 const inject = async () => {
+    // inquirer.prompt([
+    //     {
+    //         type: "confirm",
+    //         message: ''
+    //     }
+    // ])
+
     const spinner = ora('开始写入规范...\n')
     spinner.start()
 
@@ -29,7 +37,7 @@ const inject = async () => {
     })
 
     const pkgPath = path.join(process.cwd(), 'package.json')
-    const pkg = require(pkgPath)
+    const pkg = fs.existsSync(pkgPath) ? require(pkgPath) : {}
 
     const pkgTemplate = JSON.parse(filesObj['package.json'])
     const finalPkg = merge(pkg, pkgTemplate)
@@ -39,6 +47,22 @@ const inject = async () => {
     Object.entries(filesObj).forEach(([filePath, content]) => {
         fs.writeFileSync(filePath, content)
         console.log(`${filePath} 写入成功！`)
+    })
+
+    await new Promise((resolve) => {
+        const execa = require('execa')
+        const childProcess = execa('yarn', [], {
+            cwd: process.cwd(),
+            stdio: ['inherit', 'pipe', 'inherit'],
+        })
+
+        childProcess.stdout.on('data', (buffer) => {
+            process.stdout.write(buffer)
+        })
+        childProcess.on('close', (code) => {
+            if (code !== 0) return new Error(`command failed: ${code}`)
+            resolve()
+        })
     })
 
     spinner.succeed('写入完成!\n')
