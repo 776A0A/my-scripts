@@ -41,5 +41,6 @@ module.exports = {
         ], // 函数和类允许提升使用
         'consistent-return': 'off', // 允许不统一的return
         strict: 'off', // 允许使用 'use strict'
+        'no-extra-boolean-cast': 'off', // 允许使用连续的!运算符
     },
 }

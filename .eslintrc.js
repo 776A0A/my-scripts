@@ -41,5 +41,6 @@ module.exports = {
         ],
         'consistent-return': 'off',
         strict: 'off',
+        'no-extra-boolean-cast': 'off',
     },
 }
