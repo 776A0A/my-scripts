@@ -44,5 +44,6 @@ module.exports = {
         'no-extra-boolean-cast': 'off', // 允许使用连续的!运算符
         'class-methods-use-this': 'off',
         'no-return-assign': 'off',
+        'one-var': 'off',
     },
 }

@@ -44,5 +44,6 @@ module.exports = {
         'no-extra-boolean-cast': 'off',
         'class-methods-use-this': 'off',
         'no-return-assign': 'off',
+        'one-var': 'off',
     },
 }
