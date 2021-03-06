@@ -59,7 +59,9 @@ class Generator {
 
         if (!isExisting) {
             return this.exitWithError(
-                '没有检测到 package.json，请使用 npm init 进行初始化！'
+                `没有检测到 package.json，请使用 ${chalk.redBright(
+                    'npm init'
+                )} 进行初始化！`
             )
         }
 
@@ -101,7 +103,11 @@ class Generator {
                 if (code !== 0) {
                     this.spinner.stop(false)
                     reject(
-                        Error(chalk.red('Error ocurred when installing deps!'))
+                        Error(
+                            chalk.redBright(
+                                'Error ocurred when installing deps!'
+                            )
+                        )
                     )
                 }
                 this.spinner.stop(true)
