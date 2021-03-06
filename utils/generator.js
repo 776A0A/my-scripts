@@ -68,6 +68,7 @@ class Generator {
 
         const existingPkg = require(pkgPath)
 
+        // TODO 检测依赖主版本是否冲突
         this.finalTemplate['package.json'] = JSON.stringify(
             merge(existingPkg, JSON.parse(this.finalTemplate['package.json'])),
             null,

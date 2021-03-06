@@ -7,16 +7,19 @@ const path = require('path')
 const { Generator, Prompt } = require('../../utils/index')
 
 const inject = async () => {
-    // TODO 给予会被覆盖的文件以警告
     const prompt = new Prompt()
+
     prompt.injectQuestions({
         type: 'confirm',
         name: 'continue',
-        message: 'eslint、prettier、editorconfig 将会覆盖本地文件，继续吗？',
+        message:
+            '.eslint.js、.prettier.js、.editorconfig 将会覆盖本地文件，继续吗？',
         default: false,
     })
 
     const answers = await prompt.ask()
+
+    if (!answers.continue) return
 
     const generator = new Generator()
     await generator.generate(path.resolve(__dirname, './template'))
