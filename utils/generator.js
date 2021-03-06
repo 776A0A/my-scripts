@@ -2,10 +2,10 @@ const path = require('path')
 const globby = require('globby')
 const fs = require('fs-extra')
 const { merge } = require('lodash')
-const { log, error } = require('console')
 const execa = require('execa')
 const chalk = require('chalk')
 const Spinner = require('./spinner')
+const console = require('./console')
 
 class Generator {
     constructor() {
@@ -18,6 +18,7 @@ class Generator {
 
         await this.resolveTemplateFiles(templatePath)
         this.writeFile()
+        this.resetFinalTemplate()
         await this.installDeps()
     }
 
@@ -54,23 +55,21 @@ class Generator {
 
     extendPkgIfExist() {
         const pkgPath = path.join(process.cwd(), 'package.json')
-        const isExist = fs.existsSync(pkgPath)
+        const isExisting = fs.existsSync(pkgPath)
 
-        if (!isExist) {
-            error(
-                chalk.red(
-                    'Error: 没有检测到 package.json，请使用 npm init 进行初始化\n'
-                )
+        if (!isExisting) {
+            return this.exitWithError(
+                '没有检测到 package.json，请使用 npm init 进行初始化！'
             )
-            this.spinner.stop(false)
-            return process.exit(1)
         }
 
         const existingPkg = require(pkgPath)
+        const templatePkg = JSON.parse(this.finalTemplate['package.json'])
 
-        // TODO 检测依赖主版本是否冲突
+        this.resolveConflictDepMainVersion(existingPkg, templatePkg)
+
         this.finalTemplate['package.json'] = JSON.stringify(
-            merge(existingPkg, JSON.parse(this.finalTemplate['package.json'])),
+            merge(existingPkg, templatePkg),
             null,
             4
         )
@@ -81,7 +80,7 @@ class Generator {
 
         entries.forEach(([fileName, stringContent]) => {
             fs.writeFileSync(fileName, stringContent)
-            log(`${fileName} 写入成功！`)
+            console.log(`${fileName} 写入成功！`)
         })
     }
 
@@ -109,6 +108,54 @@ class Generator {
                 resolve()
             })
         })
+    }
+
+    resolveConflictDepMainVersion(existingPkg, templatePkg) {
+        const depKeys = [
+            'dependencies',
+            'devDependencies',
+            'peerDependencies',
+            'bundledDependencies',
+            'optionalDependencies',
+        ]
+
+        depKeys.forEach((key) => {
+            const existingDeps = existingPkg[key],
+                templateDeps = templatePkg[key]
+
+            if (!existingDeps || !templateDeps) return
+
+            this.compareDeps(existingPkg[key], templatePkg[key])
+        })
+    }
+
+    compareDeps(existingDeps, templateDeps) {
+        const existingDepsKeys = Object.keys(existingDeps)
+
+        existingDepsKeys.forEach((depKey) => {
+            if (!templateDeps[depKey]) return
+
+            const existingDepMainVersion = pickMainVersion(existingDeps[depKey])
+            const templateDepMainVersion = pickMainVersion(templateDeps[depKey])
+
+            if (existingDepMainVersion !== templateDepMainVersion) {
+                this.exitWithError(
+                    `The two main version of ${chalk.redBright(
+                        depKey
+                    )} are conflict!`
+                )
+            }
+        })
+
+        function pickMainVersion(version) {
+            return version.split('.')[0].replace(/\D*/, '')
+        }
+    }
+
+    exitWithError(msg) {
+        console.error(msg)
+        this.spinner.stop(false)
+        process.exit(1)
     }
 }
 

@@ -3,4 +3,5 @@ module.exports = {
     Spinner: require('./spinner'),
     Generator: require('./generator'),
     Prompt: require('./prompt'),
+    console: require('./console'),
 }

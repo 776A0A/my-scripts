@@ -14,7 +14,10 @@ class Prompt {
     }
 
     ask() {
-        return inquirer.prompt(this.questions)
+        return inquirer.prompt(this.questions).then((answers) => {
+            this.reset()
+            return answers
+        })
     }
 
     reset() {
