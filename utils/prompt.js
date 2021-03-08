@@ -11,6 +11,10 @@ class Prompt {
         } else {
             this.questions.push(question)
         }
+
+        return {
+            add: (_question) => this.injectQuestions(_question),
+        }
     }
 
     ask() {

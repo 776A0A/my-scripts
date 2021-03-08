@@ -19,7 +19,7 @@ class Generator {
         await this.resolveTemplateFiles(templatePath)
         this.writeFile()
         this.resetFinalTemplate()
-        await this.installDeps()
+        return this
     }
 
     async resolveTemplateFiles(templatePath) {
