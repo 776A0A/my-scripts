@@ -1,21 +1,26 @@
-import globby from 'globby'
 import Spinner from './spinner'
 import console from './console'
 
-type Checker = (...args: any[]) => any
-
 interface Props {
-    finalTemplate: { [key: string]: any }
     spinner: Spinner
     checkers: Set<Checker>
-    plugins: Set<any>
+    plugins: Set<Plugin>
+}
+
+type Checker = (...args: any[]) => any
+
+export abstract class Plugin {
+    commander: Creator | null = null
+    abstract exec(): void
+    inject(creator: Creator) {
+        this.commander = creator
+    }
 }
 
 class Creator implements Props {
-    finalTemplate = {}
     spinner = new Spinner()
     checkers = new Set() as Set<Checker>
-    plugins = new Set()
+    plugins = new Set() as Set<Plugin>
 
     async create() {
         this.spinner.start()
@@ -23,7 +28,7 @@ class Creator implements Props {
         await Promise.all(this.doCheck())
     }
 
-    exitIfError(isError, msg) {
+    exitIfError(isError: boolean, msg: string) {
         if (isError) {
             console.error(msg)
             this.spinner.stop(false)
@@ -31,15 +36,19 @@ class Creator implements Props {
         }
     }
 
-    addPlugin(plugin) {
+    addPlugin(plugin: Plugin) {
         this.plugins.add(plugin)
+
+        plugin.inject(this)
+
+        return this
     }
 
     runPlugin() {
         this.plugins.forEach((plugin) => plugin.exec())
     }
 
-    addChecker(checker) {
+    addChecker(checker: Checker) {
         this.checkers.add(checker)
     }
 
@@ -47,12 +56,14 @@ class Creator implements Props {
         return [...this.checkers].map((checker) => checker())
     }
 
-    clearChecker(...args) {
+    clearChecker(...args: Checker[]) {
         if (args.length === 0) {
             this.checkers = new Set()
         } else {
-            this.checkers = [...this.checkers].filter(
-                (checker) => ![...args].includes(checker)
+            this.checkers = new Set(
+                [...this.checkers].filter(
+                    (checker) => ![...args].includes(checker)
+                )
             )
         }
     }

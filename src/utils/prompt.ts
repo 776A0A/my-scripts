@@ -1,11 +1,16 @@
-import inquirer from 'inquirer'
+import inquirer, { Question, ListQuestion } from 'inquirer'
+import { Plugin } from './creator'
 
-class Prompt {
-    constructor() {
-        this.questions = []
+type PromptQuestion = Question | ListQuestion
+
+class Prompt extends Plugin {
+    questions: Array<PromptQuestion> = []
+
+    exec() {
+        //
     }
 
-    injectQuestions(question) {
+    injectQuestions(question: PromptQuestion) {
         if (this.has(question)) {
             console.error(`Multiple name: ${question.name}`)
         } else {
@@ -13,7 +18,7 @@ class Prompt {
         }
 
         return {
-            add: (_question) => this.injectQuestions(_question),
+            add: (_question: PromptQuestion) => this.injectQuestions(_question),
         }
     }
 
@@ -25,10 +30,10 @@ class Prompt {
     }
 
     reset() {
-        this.questions = {}
+        this.questions = []
     }
 
-    has(question) {
+    has(question: PromptQuestion) {
         return this.questions.some(({ name }) => name === question.name)
     }
 }

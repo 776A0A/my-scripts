@@ -2,9 +2,9 @@
 
 'use strict'
 
-const commander = require('commander')
-const path = require('path')
-const { Generator, Prompt } = require('../../utils/index')
+import commander from 'commander'
+import path from 'path'
+import { Generator, Prompt } from '../../utils'
 
 const inject = async () => {
     const prompt = new Prompt()

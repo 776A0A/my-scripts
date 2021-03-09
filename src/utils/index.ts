@@ -1,13 +1,5 @@
-import validateEmpty from './validateEmpty'
-import Spinner from './spinner'
-import Generator from './generator'
-import Prompt from './prompt'
-import console from './console'
-
-export default {
-    validateEmpty,
-    Spinner,
-    Generator,
-    Prompt,
-    console,
-}
+export { default as validateEmpty } from './validateEmpty'
+export { default as Spinner } from './spinner'
+export { default as Generator } from './generator'
+export { default as Prompt } from './prompt'
+export { default as console } from './console'

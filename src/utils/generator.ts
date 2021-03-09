@@ -2,20 +2,36 @@ import path from 'path'
 import globby from 'globby'
 import fs from 'fs-extra'
 import { merge } from 'lodash'
-import execa from 'execa'
 import chalk from 'chalk'
-import Spinner from './spinner'
 import console from './console'
+import Creator from './creator'
+import { Plugin } from './creator'
 
-class Generator {
-    constructor() {
-        this.finalTemplate = {}
-        this.spinner = new Spinner()
+interface Props {
+    finalTemplate: Json
+    commander: Creator | null
+}
+
+interface Json {
+    [key: string]: any
+}
+
+type PkgDepName =
+    | 'dependencies'
+    | 'devDependencies'
+    | 'peerDependencies'
+    | 'bundledDependencies'
+    | 'optionalDependencies'
+
+// 生成模板
+class Generator extends Plugin implements Props {
+    finalTemplate: { [key: string]: any } = {}
+
+    exec() {
+        //
     }
 
-    async generate(templatePath) {
-        this.spinner.start()
-
+    async generate(templatePath: string) {
         this.isPkgExisting()
 
         await this.resolveTemplateFiles(templatePath)
@@ -26,7 +42,7 @@ class Generator {
         return this
     }
 
-    async resolveTemplateFiles(templatePath) {
+    async resolveTemplateFiles(templatePath: string) {
         // 读取template目录下的文件
         const fileNames = await globby(['**/*'], {
             cwd: templatePath,
@@ -44,12 +60,12 @@ class Generator {
         this.extendPkg()
     }
 
-    getFileContent(templatePath, fileName) {
+    getFileContent(templatePath: string, fileName: string) {
         const absFilePath = path.resolve(templatePath, fileName)
         return fs.readFileSync(absFilePath, 'utf-8')
     }
 
-    extendFinalTemplate(fileName, content) {
+    extendFinalTemplate(fileName: string, content: any) {
         this.finalTemplate[fileName] = content
     }
 
@@ -81,38 +97,8 @@ class Generator {
         })
     }
 
-    installDeps() {
-        this.spinner.text = ''
-
-        return new Promise((resolve, reject) => {
-            const childProcess = execa('yarn', [], {
-                cwd: process.cwd(),
-                stdio: ['inherit', 'pipe', 'inherit'],
-            })
-
-            childProcess.stdout.on('data', (buffer) => {
-                process.stdout.write(buffer)
-            })
-
-            childProcess.on('close', (code) => {
-                if (code !== 0) {
-                    this.spinner.stop(false)
-                    reject(
-                        Error(
-                            chalk.redBright(
-                                'Error ocurred when installing deps!'
-                            )
-                        )
-                    )
-                }
-                this.spinner.stop(true)
-                resolve()
-            })
-        })
-    }
-
-    resolveConflictDepMainVersion(existingPkg, templatePkg) {
-        const depKeys = [
+    resolveConflictDepMainVersion(existingPkg: Json, templatePkg: Json) {
+        const depKeys: PkgDepName[] = [
             'dependencies',
             'devDependencies',
             'peerDependencies',
@@ -130,7 +116,7 @@ class Generator {
         })
     }
 
-    compareDeps(existingDeps, templateDeps) {
+    compareDeps(existingDeps: Json, templateDeps: Json) {
         const existingDepsKeys = Object.keys(existingDeps)
 
         existingDepsKeys.forEach((depKey) => {
@@ -139,7 +125,7 @@ class Generator {
             const existingDepMainVersion = pickMainVersion(existingDeps[depKey])
             const templateDepMainVersion = pickMainVersion(templateDeps[depKey])
 
-            this.exitIfError(
+            this.commander?.exitIfError(
                 existingDepMainVersion !== templateDepMainVersion,
                 `The two main version of ${chalk.redBright(
                     depKey
@@ -147,16 +133,8 @@ class Generator {
             )
         })
 
-        function pickMainVersion(version) {
+        function pickMainVersion(version: string) {
             return version.split('.')[0].replace(/\D*/, '')
-        }
-    }
-
-    exitIfError(isError, msg) {
-        if (isError) {
-            console.error(msg)
-            this.spinner.stop(false)
-            process.exit(1)
         }
     }
 
@@ -164,7 +142,7 @@ class Generator {
         const pkgPath = path.join(process.cwd(), 'package.json')
         const isExisting = fs.existsSync(pkgPath)
 
-        this.exitIfError(
+        this.commander?.exitIfError(
             !isExisting,
             `没有检测到 package.json，请使用 ${chalk.redBright(
                 'npm init'
