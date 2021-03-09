@@ -1,23 +1,37 @@
-const prettierConfig = require('./.prettierrc.js')
-
-module.exports = {
+/**
+ * @type import('eslint').Linter.Config
+ */
+const eslintConfig = {
     env: {
         browser: true,
+        commonjs: true,
         es2021: true,
-        node: true,
     },
-    extends: ['airbnb-base'],
-    plugins: ['prettier'],
+    extends: [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:prettier/recommended',
+    ],
+    parser: '@typescript-eslint/parser',
     parserOptions: {
         ecmaVersion: 12,
-        sourceType: 'module',
-        ecmaFeatures: { jsx: true },
     },
+    plugins: ['@typescript-eslint'],
     rules: {
         'prettier/prettier': [
             'error',
-            { ...prettierConfig, trailingComma: 'es5' },
+            {
+                singleQuote: true,
+                trailingComma: 'es5',
+                tabWidth: 4,
+                semi: false,
+                printWidth: 80,
+                jsxSingleQuote: true,
+            },
         ],
+        '@typescript-eslint/no-unused-vars': 'error',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
         semi: ['error', 'never'], // 不需要不必要的分号
         'comma-dangle': [
             'error',
@@ -45,5 +59,8 @@ module.exports = {
         'class-methods-use-this': 'off',
         'no-return-assign': 'off',
         'one-var': 'off',
+        'lines-between-class-members': 'error', // 类的原型方法之间需要有一个换行
     },
 }
+
+module.exports = eslintConfig
