@@ -1,4 +1,4 @@
-const ora = require('ora')
+import ora from 'ora'
 
 class Spinner {
     start() {
@@ -19,4 +19,4 @@ class Spinner {
     }
 }
 
-module.exports = Spinner
+export default Spinner

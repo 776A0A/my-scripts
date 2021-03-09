@@ -8,7 +8,7 @@ const { Generator, Prompt } = require('../../utils/index')
 
 const inject = async () => {
     const prompt = new Prompt()
-
+    // TODO 添加选择环境
     prompt
         .injectQuestions({
             type: 'confirm',

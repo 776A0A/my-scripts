@@ -1,4 +1,4 @@
-const inquirer = require('inquirer')
+import inquirer from 'inquirer'
 
 class Prompt {
     constructor() {
@@ -33,4 +33,4 @@ class Prompt {
     }
 }
 
-module.exports = Prompt
+export default Prompt

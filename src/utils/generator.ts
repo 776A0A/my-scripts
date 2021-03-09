@@ -1,11 +1,11 @@
-const path = require('path')
-const globby = require('globby')
-const fs = require('fs-extra')
-const { merge } = require('lodash')
-const execa = require('execa')
-const chalk = require('chalk')
-const Spinner = require('./spinner')
-const console = require('./console')
+import path from 'path'
+import globby from 'globby'
+import fs from 'fs-extra'
+import { merge } from 'lodash'
+import execa from 'execa'
+import chalk from 'chalk'
+import Spinner from './spinner'
+import console from './console'
 
 class Generator {
     constructor() {
@@ -173,4 +173,4 @@ class Generator {
     }
 }
 
-module.exports = Generator
+export default Generator
