@@ -16,9 +16,13 @@ class Generator {
     async generate(templatePath) {
         this.spinner.start()
 
+        this.isPkgExisting()
+
         await this.resolveTemplateFiles(templatePath)
-        this.writeFile()
+        this.writeFileToLocal()
+
         this.resetFinalTemplate()
+
         return this
     }
 
@@ -37,7 +41,7 @@ class Generator {
             )
         })
 
-        this.extendPkgIfExist()
+        this.extendPkg()
     }
 
     getFileContent(templatePath, fileName) {
@@ -53,17 +57,8 @@ class Generator {
         this.finalTemplate = {}
     }
 
-    extendPkgIfExist() {
+    extendPkg() {
         const pkgPath = path.join(process.cwd(), 'package.json')
-        const isExisting = fs.existsSync(pkgPath)
-
-        if (!isExisting) {
-            return this.exitWithError(
-                `没有检测到 package.json，请使用 ${chalk.redBright(
-                    'npm init'
-                )} 进行初始化！`
-            )
-        }
 
         const existingPkg = require(pkgPath)
         const templatePkg = JSON.parse(this.finalTemplate['package.json'])
@@ -77,7 +72,7 @@ class Generator {
         )
     }
 
-    writeFile() {
+    writeFileToLocal() {
         const entries = Object.entries(this.finalTemplate)
 
         entries.forEach(([fileName, stringContent]) => {
@@ -144,13 +139,12 @@ class Generator {
             const existingDepMainVersion = pickMainVersion(existingDeps[depKey])
             const templateDepMainVersion = pickMainVersion(templateDeps[depKey])
 
-            if (existingDepMainVersion !== templateDepMainVersion) {
-                this.exitWithError(
-                    `The two main version of ${chalk.redBright(
-                        depKey
-                    )} are conflict!`
-                )
-            }
+            this.exitIfError(
+                existingDepMainVersion !== templateDepMainVersion,
+                `The two main version of ${chalk.redBright(
+                    depKey
+                )} are conflict!`
+            )
         })
 
         function pickMainVersion(version) {
@@ -158,10 +152,24 @@ class Generator {
         }
     }
 
-    exitWithError(msg) {
-        console.error(msg)
-        this.spinner.stop(false)
-        process.exit(1)
+    exitIfError(isError, msg) {
+        if (isError) {
+            console.error(msg)
+            this.spinner.stop(false)
+            process.exit(1)
+        }
+    }
+
+    isPkgExisting() {
+        const pkgPath = path.join(process.cwd(), 'package.json')
+        const isExisting = fs.existsSync(pkgPath)
+
+        this.exitIfError(
+            !isExisting,
+            `没有检测到 package.json，请使用 ${chalk.redBright(
+                'npm init'
+            )} 进行初始化！`
+        )
     }
 }
 
