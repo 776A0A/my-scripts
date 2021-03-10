@@ -1,23 +1,42 @@
-const prettierConfig = require('./.prettierrc.js')
-
-module.exports = {
+/**
+ * @type import('eslint').Linter.Config
+ */
+const eslintConfig = {
     env: {
         browser: true,
+        commonjs: true,
         es2021: true,
-        node: true,
     },
-    extends: ['airbnb-base'],
-    plugins: ['prettier'],
+    extends: [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:prettier/recommended',
+    ],
+    parser: '@typescript-eslint/parser',
     parserOptions: {
         ecmaVersion: 12,
-        sourceType: 'module',
-        ecmaFeatures: { jsx: true },
     },
+    plugins: ['@typescript-eslint'],
     rules: {
         'prettier/prettier': [
             'error',
-            { ...prettierConfig, trailingComma: 'es5' },
+            {
+                singleQuote: true,
+                trailingComma: 'es5',
+                tabWidth: 4,
+                semi: false,
+                printWidth: 80,
+                jsxSingleQuote: true,
+            },
         ],
+        '@typescript-eslint/no-unused-vars': 'error',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/no-use-before-define': [
+            'error',
+            { functions: false, classes: false },
+        ], // function和class以及其他ts关键字可以在声明之前使用
+        '@typescript-eslint/no-var-requires': 'off',
         semi: ['error', 'never'], // 不需要不必要的分号
         'comma-dangle': [
             'error',
@@ -30,20 +49,19 @@ module.exports = {
             },
         ], // 对于逗号的规则
         'no-console': 'off', // 允许使用console
-        indent: ['error', 4],
-        quotes: ['error', 'single'],
+        indent: ['error', 4], // 缩进
+        quotes: ['error', 'single'], // 引号
         'jsx-quotes': ['error', 'prefer-single'],
-        'global-require': 'off', // 关闭默认只能顶层使用require()
-        'import/no-dynamic-require': 'off', // require(path) path允许动态内容
-        'no-use-before-define': [
-            'error',
-            { functions: false, classes: false, variables: true },
-        ], // 函数和类允许提升使用
-        'consistent-return': 'off', // 允许不统一的return
-        strict: 'off', // 允许使用 'use strict'
-        'no-extra-boolean-cast': 'off', // 允许使用连续的!运算符
+        'global-require': 'off', // 在ts中可以使用require
+        'import/no-dynamic-require': 'off',
+        'no-use-before-define': 'off', // 在声明之前使用
+        'consistent-return': 'off',
+        strict: 'off',
+        'no-extra-boolean-cast': 'off', // 可以使用!!
         'class-methods-use-this': 'off',
         'no-return-assign': 'off',
         'one-var': 'off',
     },
 }
+
+module.exports = eslintConfig
