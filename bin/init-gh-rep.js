@@ -8,7 +8,7 @@ const { spawn } = require('child_process')
 const { log } = require('console')
 const chalk = require('chalk')
 const commander = require('commander')
-const { validateEmpty } = require('../utils')
+const { validateEmpty } = require('../src/utils')
 
 function ask(address) {
     const defaultProjectName = address.split('/')[1]
