@@ -2,13 +2,13 @@
 
 'use strict'
 
-const inquirer = require('inquirer')
-const ora = require('ora')
-const { spawn } = require('child_process')
-const { log } = require('console')
-const chalk = require('chalk')
-const commander = require('commander')
-const { validateEmpty } = require('../src/utils')
+import inquirer from 'inquirer'
+import ora from 'ora'
+import { spawn } from 'child_process'
+import { log } from 'console'
+import chalk from 'chalk'
+import commander from 'commander'
+import { validateEmpty } from '../src/utils'
 
 function ask(address) {
     const defaultProjectName = address.split('/')[1]
