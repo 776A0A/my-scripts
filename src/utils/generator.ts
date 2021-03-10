@@ -4,12 +4,11 @@ import fs from 'fs-extra'
 import { merge } from 'lodash'
 import chalk from 'chalk'
 import console from './console'
-import Creator from './creator'
 import { Plugin } from './creator'
 
 interface Props {
     finalTemplate: Json
-    commander: Creator | null
+    templatePath: string
 }
 
 interface Json {
@@ -25,16 +24,21 @@ type PkgDepName =
 
 // 生成模板
 class Generator extends Plugin implements Props {
-    finalTemplate: { [key: string]: any } = {}
+    finalTemplate = {} as Json
+    templatePath = ''
 
-    exec() {
-        //
+    async exec() {
+        if (!this.templatePath) {
+            this.commander?.exitIfError(true, '没有传入模板路径！')
+        }
+
+        await this.generate()
     }
 
-    async generate(templatePath: string) {
+    async generate() {
         this.isPkgExisting()
 
-        await this.resolveTemplateFiles(templatePath)
+        await this.resolveTemplateFiles()
         this.writeFileToLocal()
 
         this.resetFinalTemplate()
@@ -42,26 +46,28 @@ class Generator extends Plugin implements Props {
         return this
     }
 
-    async resolveTemplateFiles(templatePath: string) {
+    addTemplatePath(templatePath: string) {
+        this.templatePath = templatePath
+    }
+
+    async resolveTemplateFiles() {
+        const templatePath = this.templatePath
         // 读取template目录下的文件
         const fileNames = await globby(['**/*'], {
             cwd: templatePath,
-            dot: true,
+            dot: true, // 以点开头的文件也加入
         })
 
         // 将内容解析到finalTemplate中
         fileNames.forEach((fileName) => {
-            this.extendFinalTemplate(
-                fileName,
-                this.getFileContent(templatePath, fileName)
-            )
+            this.extendFinalTemplate(fileName, this.getFileContent(fileName))
         })
 
         this.extendPkg()
     }
 
-    getFileContent(templatePath: string, fileName: string) {
-        const absFilePath = path.resolve(templatePath, fileName)
+    getFileContent(fileName: string) {
+        const absFilePath = path.resolve(this.templatePath, fileName)
         return fs.readFileSync(absFilePath, 'utf-8')
     }
 

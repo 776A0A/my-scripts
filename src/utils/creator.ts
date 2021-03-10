@@ -1,31 +1,42 @@
 import Spinner from './spinner'
 import console from './console'
+import { Answers } from 'inquirer'
 
 interface Props {
+    answers: Answers
     spinner: Spinner
     checkers: Set<Checker>
     plugins: Set<Plugin>
+    hooks: Hooks
 }
+
+type Hooks = {
+    [key in HookType]?: Array<Hook>
+}
+
+type Hook = () => void
 
 type Checker = (...args: any[]) => any
 
 export abstract class Plugin {
     commander: Creator | null = null
-    abstract exec(): void
+    abstract exec?(...args: any[]): any
     inject(creator: Creator) {
         this.commander = creator
     }
 }
 
+type HookType = 'start' | 'end'
+
 class Creator implements Props {
+    answers: Answers = {}
     spinner = new Spinner()
-    checkers = new Set() as Set<Checker>
-    plugins = new Set() as Set<Plugin>
+    checkers: Set<Checker> = new Set()
+    plugins: Set<Plugin> = new Set()
+    hooks: Hooks = {}
 
     async create() {
         this.spinner.start()
-
-        await Promise.all(this.doCheck())
     }
 
     exitIfError(isError: boolean, msg: string) {
@@ -44,28 +55,23 @@ class Creator implements Props {
         return this
     }
 
-    runPlugin() {
-        this.plugins.forEach((plugin) => plugin.exec())
-    }
+    async runPlugin() {
+        const plugins = [...this.plugins]
 
-    addChecker(checker: Checker) {
-        this.checkers.add(checker)
-    }
+        let results
 
-    doCheck() {
-        return [...this.checkers].map((checker) => checker())
-    }
-
-    clearChecker(...args: Checker[]) {
-        if (args.length === 0) {
-            this.checkers = new Set()
-        } else {
-            this.checkers = new Set(
-                [...this.checkers].filter(
-                    (checker) => ![...args].includes(checker)
-                )
-            )
+        for (let i = 0; i < plugins.length; i++) {
+            const plugin = plugins[i]
+            results = await plugin.exec?.(results)
         }
+    }
+
+    injectHook(hook: HookType, cb: Hook) {
+        ;(this.hooks[hook] || (this.hooks[hook] = [])).push(cb)
+    }
+
+    addAnswer(answers: Answers) {
+        this.answers = answers
     }
 }
 

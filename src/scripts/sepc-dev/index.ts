@@ -4,13 +4,14 @@
 
 import commander from 'commander'
 import path from 'path'
-import { Generator, Prompt } from '../../utils'
+import { Generator, Prompt, Creator, Installer } from '../../utils'
 
 const inject = async () => {
+    const creator = new Creator()
     const prompt = new Prompt()
     // TODO 添加选择环境
     prompt
-        .injectQuestions({
+        .injectQuestion({
             type: 'confirm',
             name: 'continue',
             message:
@@ -34,19 +35,14 @@ const inject = async () => {
             },
         })
 
-    const answers = await prompt.ask()
-
-    if (!answers.continue) return
-
     const generator = new Generator()
+    generator.addTemplatePath(path.resolve(__dirname, './template'))
+
+    const installer = new Installer()
+
+    creator.addPlugin(prompt).addPlugin(generator).addPlugin(installer)
+
     // TODO 需要重构类，增加一个顶级父类，控制spinner，generator只负责生成，再新建一个install类，用于控制安装
-    await generator
-        .generate(path.resolve(__dirname, './template'))
-        .then((g) => {
-            if (answers.autoInstall) {
-                g.installDeps()
-            }
-        })
 }
 
 module.exports = {

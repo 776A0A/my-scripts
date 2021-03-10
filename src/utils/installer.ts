@@ -4,8 +4,11 @@ import { Plugin } from './creator'
 
 // 安装依赖
 class Installer extends Plugin {
-    exec() {
-        //
+    async exec() {
+        const autoInstall = this.commander?.answers?.autoInstall
+        if (!autoInstall) return
+
+        await this.install()
     }
     install() {
         return new Promise<void>((resolve, reject) => {

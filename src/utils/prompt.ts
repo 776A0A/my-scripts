@@ -6,11 +6,11 @@ type PromptQuestion = Question | ListQuestion
 class Prompt extends Plugin {
     questions: Array<PromptQuestion> = []
 
-    exec() {
-        //
+    async exec() {
+        return await this.ask()
     }
 
-    injectQuestions(question: PromptQuestion) {
+    injectQuestion(question: PromptQuestion) {
         if (this.has(question)) {
             console.error(`Multiple name: ${question.name}`)
         } else {
@@ -18,7 +18,7 @@ class Prompt extends Plugin {
         }
 
         return {
-            add: (_question: PromptQuestion) => this.injectQuestions(_question),
+            add: (_question: PromptQuestion) => this.injectQuestion(_question),
         }
     }
 

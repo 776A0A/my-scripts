@@ -10,7 +10,7 @@ commander
     .option('-h, --help', 'get usage of sns')
 
 const initGhRep = require('./init-gh-rep')
-const initSpecDev = require('../scripts/sepc-dev')
+const initSpecDev = require('../lib/scripts/sepc-dev')
 
 runRegisterQueue([initGhRep, initSpecDev])
 
