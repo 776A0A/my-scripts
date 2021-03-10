@@ -1,6 +1,6 @@
 {
     "name": "simple-node-script",
-    "version": "1.5.0",
+    "version": "1.6.0",
     "description": "",
     "main": "init-gh-rep.js",
     "scripts": {
