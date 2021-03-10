@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file. See [standa
 * **generator:** 修改报错关键字颜色为redBright ([b067146](https://github.com/776A0A/simple-node-script/commit/b0671461751584e2dccbb10125cf09d691845202))
 * 添加generator/prompt执行后自动重置；generator添加检测依赖主版本冲突； ([dab459f](https://github.com/776A0A/simple-node-script/commit/dab459f034919fade9de16c4b7ff791f00d2023d))
 * **init-gh-rep:** 默认的branch名从master-->main ([b70cfbf](https://github.com/776A0A/simple-node-script/commit/b70cfbf7fc6dc1f123dd4875cf478386430e897c))
-* **sepc-dev:** 添加secp-dev下的template ([1539e5f](https://github.com/776A0A/simple-node-script/commit/1539e5f6070a37ee576c3d572e48b31be227f87d))
+* **spec-dev:** 添加secp-dev下的template ([1539e5f](https://github.com/776A0A/simple-node-script/commit/1539e5f6070a37ee576c3d572e48b31be227f87d))
 * **spec-dev:** 添加覆盖本地文件提问 ([04c6804](https://github.com/776A0A/simple-node-script/commit/04c680412be68d2e5517b60ff1c4042fba931d09))
 * **spec-dev:** 添加eslint规则配置 ([e28d0a8](https://github.com/776A0A/simple-node-script/commit/e28d0a8ca3ea6b7350fd13643f6f4c118d5a0ff0))
 * **spec-dev:** 新增eslint配置规则 ([36ef68a](https://github.com/776A0A/simple-node-script/commit/36ef68ac8c00c42d5d33e89cfa163129362cbc39))
