@@ -13,9 +13,7 @@ const eslintConfig = {
         'plugin:prettier/recommended',
     ],
     parser: '@typescript-eslint/parser',
-    parserOptions: {
-        ecmaVersion: 12,
-    },
+    parserOptions: { ecmaVersion: 12 },
     plugins: ['@typescript-eslint'],
     rules: {
         'prettier/prettier': [
@@ -61,7 +59,6 @@ const eslintConfig = {
         'class-methods-use-this': 'off',
         'no-return-assign': 'off',
         'one-var': 'off',
-        // 'lines-between-class-members': 'error', // 类的原型方法之间需要有一个换行
     },
 }
 
