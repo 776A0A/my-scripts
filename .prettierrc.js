@@ -8,7 +8,14 @@ const prettierConfig = {
     semi: false,
     printWidth: 80,
     jsxSingleQuote: true,
-    parser: 'typescript',
+    overrides: [
+        {
+            files: ['*.ts', '*.tsx'],
+            options: {
+                parser: 'typescript',
+            },
+        },
+    ],
 }
 
 module.exports = prettierConfig
