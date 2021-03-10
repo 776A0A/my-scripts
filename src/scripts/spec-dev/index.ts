@@ -41,11 +41,9 @@ const inject = async () => {
     const installer = new Installer()
 
     creator.addPlugin(prompt).addPlugin(generator).addPlugin(installer)
-
-    // TODO 需要重构类，增加一个顶级父类，控制spinner，generator只负责生成，再新建一个install类，用于控制安装
 }
 
-module.exports = {
+export default {
     register: () => {
         commander
             .command('spec-dev')

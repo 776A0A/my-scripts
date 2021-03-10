@@ -211,6 +211,16 @@
         "signature": "1e61418f41d404e744b6536af9f8c6f6674dd4d54c12335cd0c4f7eded69cf3f",
         "affectsGlobalScope": true
       },
+      "./node_modules/commander/typings/index.d.ts": {
+        "version": "8873603e6e9e8a77ff2d5256b1b146475a2abf80a12e6b1da3edee4d171f3c39",
+        "signature": "8873603e6e9e8a77ff2d5256b1b146475a2abf80a12e6b1da3edee4d171f3c39",
+        "affectsGlobalScope": false
+      },
+      "./src/utils/validateempty.ts": {
+        "version": "4ed392a1c39297549be104460e5c116506c0c030f0b9bb8cd10f08f9c6b32128",
+        "signature": "8b44adf58b797222574f1be3ff8f9fba29ea598f46b66b7f25391f24a8832600",
+        "affectsGlobalScope": false
+      },
       "./node_modules/@types/node/globals.d.ts": {
         "version": "25b4a0c4fab47c373ee49df4c239826ee3430019fc0c1b5e59edc3e398b7468d",
         "signature": "25b4a0c4fab47c373ee49df4c239826ee3430019fc0c1b5e59edc3e398b7468d",
@@ -444,36 +454,6 @@
       "./node_modules/@types/node/index.d.ts": {
         "version": "9c4c395e927045b324877acdc4bfb95f128f36bc9f073266a2f0342495075a4f",
         "signature": "9c4c395e927045b324877acdc4bfb95f128f36bc9f073266a2f0342495075a4f",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/@types/minimatch/index.d.ts": {
-        "version": "1d1e6bd176eee5970968423d7e215bfd66828b6db8d54d17afec05a831322633",
-        "signature": "1d1e6bd176eee5970968423d7e215bfd66828b6db8d54d17afec05a831322633",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/@types/glob/index.d.ts": {
-        "version": "393137c76bd922ba70a2f8bf1ade4f59a16171a02fb25918c168d48875b0cfb0",
-        "signature": "393137c76bd922ba70a2f8bf1ade4f59a16171a02fb25918c168d48875b0cfb0",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/@types/shelljs/index.d.ts": {
-        "version": "b73abc91e3166b1951d302f8008c17e62d32e570e71b2680141f7c3f5d0a990d",
-        "signature": "b73abc91e3166b1951d302f8008c17e62d32e570e71b2680141f7c3f5d0a990d",
-        "affectsGlobalScope": false
-      },
-      "./src/rename-js.ts": {
-        "version": "3cded7746027649f2e8f9a17d88101a56285ce586cd3a60ec5364c2eded96cac",
-        "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/commander/typings/index.d.ts": {
-        "version": "8873603e6e9e8a77ff2d5256b1b146475a2abf80a12e6b1da3edee4d171f3c39",
-        "signature": "8873603e6e9e8a77ff2d5256b1b146475a2abf80a12e6b1da3edee4d171f3c39",
-        "affectsGlobalScope": false
-      },
-      "./src/utils/validateempty.ts": {
-        "version": "4ed392a1c39297549be104460e5c116506c0c030f0b9bb8cd10f08f9c6b32128",
-        "signature": "8b44adf58b797222574f1be3ff8f9fba29ea598f46b66b7f25391f24a8832600",
         "affectsGlobalScope": false
       },
       "./node_modules/cli-spinners/index.d.ts": {
@@ -1117,7 +1097,7 @@
         "affectsGlobalScope": false
       },
       "./src/utils/generator.ts": {
-        "version": "ede1cf1b9200c7e95e97ae68fc302d989e61ab96f6d8f14a9301a078d9343e46",
+        "version": "85256b2b782ed00a4e832f737499a7adfc22322cf4c4b5c1ef99c6ebb3760659",
         "signature": "6cbb83fa575e1deb487f7895ea40d0cf366e31565e3c6cb7f5cd00abcb8e9fe4",
         "affectsGlobalScope": false
       },
@@ -1141,14 +1121,24 @@
         "signature": "01a7bd2f05bc6ed06a89b115b0a99f29812aa1b60063fbfc0ec2d95567bdabde",
         "affectsGlobalScope": false
       },
-      "./src/scripts/sepc-dev/index.ts": {
-        "version": "74d0a4d82ac5681d79558e0d918b93616fda44fe3397a39725e35e0f804a2ad1",
-        "signature": "62f7e13204b7caa68a4c44c410b1c11db231ef463a14b831657f9841cafa35f2",
+      "./src/scripts/spec-dev/index.ts": {
+        "version": "2ec372b110d41bb295f67e727ef0f7971fb7a7a87b21939a9e50ecc3f95dc4cd",
+        "signature": "6e197830df868079dd53fecb7fd374e869252580ddc627bb35c38ddc87b23e8a",
         "affectsGlobalScope": false
       },
       "./src/utils/chosepkgmanager.ts": {
         "version": "9fb7cc9ace09cf4573c65bae8bfe8c5d57ed138fce9a673dc23eaf5235ed5c75",
         "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/minimatch/index.d.ts": {
+        "version": "1d1e6bd176eee5970968423d7e215bfd66828b6db8d54d17afec05a831322633",
+        "signature": "1d1e6bd176eee5970968423d7e215bfd66828b6db8d54d17afec05a831322633",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/glob/index.d.ts": {
+        "version": "393137c76bd922ba70a2f8bf1ade4f59a16171a02fb25918c168d48875b0cfb0",
+        "signature": "393137c76bd922ba70a2f8bf1ade4f59a16171a02fb25918c168d48875b0cfb0",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/json-schema/index.d.ts": {
@@ -1170,14 +1160,22 @@
         "version": "c9ad058b2cc9ce6dc2ed92960d6d009e8c04bef46d3f5312283debca6869f613",
         "signature": "c9ad058b2cc9ce6dc2ed92960d6d009e8c04bef46d3f5312283debca6869f613",
         "affectsGlobalScope": false
+      },
+      "./node_modules/@types/parse-json/index.d.ts": {
+        "version": "2b8264b2fefd7367e0f20e2c04eed5d3038831fe00f5efbc110ff0131aab899b",
+        "signature": "2b8264b2fefd7367e0f20e2c04eed5d3038831fe00f5efbc110ff0131aab899b",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/shelljs/index.d.ts": {
+        "version": "b73abc91e3166b1951d302f8008c17e62d32e570e71b2680141f7c3f5d0a990d",
+        "signature": "b73abc91e3166b1951d302f8008c17e62d32e570e71b2680141f7c3f5d0a990d",
+        "affectsGlobalScope": false
       }
     },
     "options": {
       "incremental": true,
       "target": 1,
       "module": 1,
-      "outDir": "./lib",
-      "rootDir": "./src",
       "strict": true,
       "moduleResolution": 2,
       "lib": [
@@ -1187,6 +1185,7 @@
       "skipLibCheck": true,
       "forceConsistentCasingInFileNames": true,
       "downlevelIteration": true,
+      "sourceMap": false,
       "configFilePath": "./tsconfig.json"
     },
     "referencedMap": {
@@ -2145,10 +2144,7 @@
       "./node_modules/rxjs/internal/util/pipe.d.ts": [
         "./node_modules/rxjs/internal/types.d.ts"
       ],
-      "./src/rename-js.ts": [
-        "./node_modules/@types/shelljs/index.d.ts"
-      ],
-      "./src/scripts/sepc-dev/index.ts": [
+      "./src/scripts/spec-dev/index.ts": [
         "./node_modules/@types/node/path.d.ts",
         "./node_modules/commander/typings/index.d.ts",
         "./src/utils/index.ts"
@@ -3324,6 +3320,7 @@
       "./node_modules/@types/node/worker_threads.d.ts",
       "./node_modules/@types/node/zlib.d.ts",
       "./node_modules/@types/normalize-package-data/index.d.ts",
+      "./node_modules/@types/parse-json/index.d.ts",
       "./node_modules/@types/shelljs/index.d.ts",
       "./node_modules/@types/through/index.d.ts",
       "./node_modules/chalk/index.d.ts",
@@ -3400,8 +3397,7 @@
       "./node_modules/rxjs/internal/util/pipe.d.ts",
       "./node_modules/rxjs/internal/util/timeouterror.d.ts",
       "./node_modules/rxjs/internal/util/unsubscriptionerror.d.ts",
-      "./src/rename-js.ts",
-      "./src/scripts/sepc-dev/index.ts",
+      "./src/scripts/spec-dev/index.ts",
       "./src/utils/chosepkgmanager.ts",
       "./src/utils/console.ts",
       "./src/utils/creator.ts",
