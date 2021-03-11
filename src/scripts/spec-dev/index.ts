@@ -23,16 +23,14 @@ const inject = async () => {
             name: 'autoInstall',
             message: '是否自动下载依赖？',
             default: true,
+            when: (answers) => answers.continue,
         })
         .add({
             type: 'list',
             name: 'installer',
             choices: ['yarn', 'cnpm', 'npm'],
             default: 0,
-            when: (answers) => {
-                if (answers.autoInstall) return true
-                return false
-            },
+            when: (answers) => answers.autoInstall,
         })
 
     const generator = new Generator()
@@ -41,6 +39,8 @@ const inject = async () => {
     const installer = new Installer()
 
     creator.addPlugin(prompt).addPlugin(generator).addPlugin(installer)
+
+    await creator.create().runPlugin()
 }
 
 export default {

@@ -216,11 +216,6 @@
         "signature": "8873603e6e9e8a77ff2d5256b1b146475a2abf80a12e6b1da3edee4d171f3c39",
         "affectsGlobalScope": false
       },
-      "./src/utils/validateempty.ts": {
-        "version": "4ed392a1c39297549be104460e5c116506c0c030f0b9bb8cd10f08f9c6b32128",
-        "signature": "8b44adf58b797222574f1be3ff8f9fba29ea598f46b66b7f25391f24a8832600",
-        "affectsGlobalScope": false
-      },
       "./node_modules/@types/node/globals.d.ts": {
         "version": "25b4a0c4fab47c373ee49df4c239826ee3430019fc0c1b5e59edc3e398b7468d",
         "signature": "25b4a0c4fab47c373ee49df4c239826ee3430019fc0c1b5e59edc3e398b7468d",
@@ -467,7 +462,7 @@
         "affectsGlobalScope": false
       },
       "./src/utils/spinner.ts": {
-        "version": "d2263b279ad6afa9986e46de1dc4cb9c1e7779c0d8284d165b3e0ff63a921dcc",
+        "version": "79a7bcbffbc836d4836bc02634c228b93d1bb2ed7da12cd913c5800576dc7797",
         "signature": "22e6ccbe4c4c935e774ab5fa4e4693fe021debab4b0de83b7954fbe35d14cfa1",
         "affectsGlobalScope": false
       },
@@ -1092,12 +1087,12 @@
         "affectsGlobalScope": false
       },
       "./src/utils/creator.ts": {
-        "version": "d6c58f239a3f100f6811a91689d6c3ff8a9490132de2a5f9ec35406bc7fd1379",
-        "signature": "4e85a3c638a66d6c39072d5d5488587e9db469ec0f37bdc9ceffac0e52f7be57",
+        "version": "e5973df7d8f4a9ad82624fdf9c5c254305dd3f90161275aec40b70d51ab64cc4",
+        "signature": "7af331cbf83c23e4fc6cc6fd8c33ecb4ead9257f6a1f0015ec81b18a8c9f8f5e",
         "affectsGlobalScope": false
       },
       "./src/utils/generator.ts": {
-        "version": "85256b2b782ed00a4e832f737499a7adfc22322cf4c4b5c1ef99c6ebb3760659",
+        "version": "7ad263da4899876c527065ffdb455c0d5832afb30a8bebcfc2905c5bd67ef5e7",
         "signature": "6cbb83fa575e1deb487f7895ea40d0cf366e31565e3c6cb7f5cd00abcb8e9fe4",
         "affectsGlobalScope": false
       },
@@ -1117,18 +1112,23 @@
         "affectsGlobalScope": false
       },
       "./src/utils/index.ts": {
-        "version": "a949ac7a04e94d4f93e9bf1ce35e8111f2c2204ddc3f57958f3f00dac0b2bb9f",
-        "signature": "01a7bd2f05bc6ed06a89b115b0a99f29812aa1b60063fbfc0ec2d95567bdabde",
+        "version": "35fdc40932e270c9d43e096d9039fd5a6ebf97ed8f08e49ee9eaead22eb2ddde",
+        "signature": "2425657255087ba41cec6e69140df0141ee458d5c629717c51eba70b3929f0af",
         "affectsGlobalScope": false
       },
       "./src/scripts/spec-dev/index.ts": {
-        "version": "2ec372b110d41bb295f67e727ef0f7971fb7a7a87b21939a9e50ecc3f95dc4cd",
+        "version": "33393c00fd01f08549b0f3f8b4bb46d4bbe82d2beb7b03c474dc142bc7dadef2",
         "signature": "6e197830df868079dd53fecb7fd374e869252580ddc627bb35c38ddc87b23e8a",
         "affectsGlobalScope": false
       },
       "./src/utils/chosepkgmanager.ts": {
         "version": "9fb7cc9ace09cf4573c65bae8bfe8c5d57ed138fce9a673dc23eaf5235ed5c75",
         "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "affectsGlobalScope": false
+      },
+      "./src/utils/validateempty.ts": {
+        "version": "4ed392a1c39297549be104460e5c116506c0c030f0b9bb8cd10f08f9c6b32128",
+        "signature": "8b44adf58b797222574f1be3ff8f9fba29ea598f46b66b7f25391f24a8832600",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/minimatch/index.d.ts": {
@@ -1186,6 +1186,7 @@
       "forceConsistentCasingInFileNames": true,
       "downlevelIteration": true,
       "sourceMap": false,
+      "resolveJsonModule": true,
       "configFilePath": "./tsconfig.json"
     },
     "referencedMap": {
@@ -2173,8 +2174,7 @@
         "./src/utils/generator.ts",
         "./src/utils/installer.ts",
         "./src/utils/prompt.ts",
-        "./src/utils/spinner.ts",
-        "./src/utils/validateempty.ts"
+        "./src/utils/spinner.ts"
       ],
       "./src/utils/installer.ts": [
         "./node_modules/chalk/index.d.ts",
@@ -3158,8 +3158,7 @@
         "./src/utils/generator.ts",
         "./src/utils/installer.ts",
         "./src/utils/prompt.ts",
-        "./src/utils/spinner.ts",
-        "./src/utils/validateempty.ts"
+        "./src/utils/spinner.ts"
       ],
       "./src/utils/installer.ts": [
         "./src/utils/creator.ts"

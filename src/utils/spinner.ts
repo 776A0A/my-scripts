@@ -1,10 +1,7 @@
 import ora from 'ora'
 
 class Spinner {
-    spinner = ora({
-        text: 'Start!\n',
-        spinner: 'dots11',
-    })
+    spinner = ora({ text: 'Start!\n' })
 
     start() {
         this.spinner.start()

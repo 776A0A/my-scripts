@@ -35,8 +35,9 @@ class Creator implements Props {
     plugins: Set<Plugin> = new Set()
     hooks: Hooks = {}
 
-    async create() {
+    create() {
         this.spinner.start()
+        return this
     }
 
     exitIfError(isError: boolean, msg: string) {
