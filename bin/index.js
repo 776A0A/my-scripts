@@ -2,4 +2,4 @@
 
 'use strict'
 
-require('./exec.js')
+require('./register.js')
